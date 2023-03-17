@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Courses" >
+        <item >Computer Science</item>
+        <item>Information Technology</item>
+        <item> Electrical Engineering</item>
+        <item>
+            Building and Information Technology
+        </item>
+        <item>Business and Information Technology</item>
+    </string-array>
+    <string-array name="Department">
+        <item>Computer Science and Information Technology </item>
+        <item> Electrical and Mechanical Engineering</item>
+        <item>Department of Building and Construction</item>
+        <item>Department of Business Studies</item>
+    </string-array>
+    <string-array name="School">
+        <item>School of  Science </item>
+        <item>School of Engineering</item>
+        <item>School of Business</item>
+        <item>School of Building Technology</item>
+    </string-array>
+    <string-array name="Year">
+        <item>1st Year</item>
+        <item>2nd year</item>
+        <item>3rd Year</item>
+        <item>4th Year</item>
+        <item>5th year</item>
+    </string-array>
+    <string-array name="Semester">
+        <item>1st Semester</item>
+        <item>2nd Semester</item>
+        <item>Attachment</item>
+    </string-array>
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CourseDetails">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TILCourse"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="Select a Course"
+        >
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/SpCourse"
+            android:entries="@array/Courses"
+            android:padding="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TILYear"
+        app:layout_constraintTop_toBottomOf="@id/TILCourse"
+        android:hint="Select Year"
+        >
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/SpYear"
+            android:entries="@array/Year"
+            android:padding="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TILSemester"
+        app:layout_constraintTop_toBottomOf="@id/TILYear"
+        android:hint="Select a Semester"
+        >
+
+        <Spinner
+            android:id="@+id/SpSemester"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/Semester"
+            android:padding="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/LvUnits"
+        app:layout_constraintTop_toBottomOf="@id/TILSemester"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/LvUnits"
+        android:text="Save Details"
+        android:id="@+id/BtnSave"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
