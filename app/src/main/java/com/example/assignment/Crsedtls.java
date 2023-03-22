@@ -1,5 +1,10 @@
 package com.example.assignment;
 
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,36 +34,75 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.Inflater;
 
-public class CourseDetails extends AppCompatActivity {
-    public Spinner course,Year,semster;
+import android.view.View;
+import android.view.ViewGroup;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link Crsedtls#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class Crsedtls extends Fragment {
+    public Spinner course, Year, semster;
     public Button save;
     public ListView listView;
     private static final String TAG = "CourseDetails"; // add this line
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public Crsedtls() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Crsedtls.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static Crsedtls newInstance(String param1, String param2) {
+        Crsedtls fragment = new Crsedtls();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_details);
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_crsedtls, container, false);
+//        setContentView(R.layout.activity_course_details);
 
-        course=findViewById(R.id.SpCourse);
-        Year=findViewById(R.id.SpYear);
-        semster=findViewById(R.id.SpSemester);
-        save=findViewById(R.id.BtnSave);
-        listView=findViewById(R.id.LvUnits);
+        course = view.findViewById(R.id.SpCourse);
+        Year = view.findViewById(R.id.SpYear);
+        semster = view.findViewById(R.id.SpSemester);
+        save = view.findViewById(R.id.BtnSave);
+        listView = view.findViewById(R.id.LvUnits);
 
-        String selectedValue = getIntent().getStringExtra("selectedValue");
-        String reg=getIntent().getStringExtra("reg");
-        Spinner spinner = findViewById(R.id.SpCourse);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Courses, android.R.layout.simple_spinner_item);
+        String selectedValue = getActivity().getIntent().getStringExtra("selectedValue");
+        String reg = getActivity().getIntent().getStringExtra("reg");
+        Spinner spinner = view.findViewById(R.id.SpCourse);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.Courses, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(adapter.getPosition(selectedValue));
-        String crse=course.getSelectedItem().toString();
-//        String yr=Year.getSelectedItem().toString();
-//        String sem=semster.getSelectedItem().toString();
-
-
+        String crse = course.getSelectedItem().toString();
+        String yr = Year.getSelectedItem().toString();
+        String sem = semster.getSelectedItem().toString();
 
         Year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -71,11 +115,11 @@ public class CourseDetails extends AppCompatActivity {
                 String yr=Year.getSelectedItem().toString();
                 Query query;
                 if (sem.equals("1st Semester") && yr.equals("1st Year")){
-                    Toast.makeText(getBaseContext(), sem, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), sem, Toast.LENGTH_SHORT).show();
 
 
                 } else if (sem.equals("2nd Semester") && yr.equals("1st Year")){
-                    Toast.makeText(getBaseContext(), "This also Works", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "This also Works", Toast.LENGTH_SHORT).show();
 
                 }
                 if (sem.equals("1st Semester") && yr.equals("1st Year")) {
@@ -130,7 +174,7 @@ public class CourseDetails extends AppCompatActivity {
                             units.add(name);
                             units.add(code);
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(CourseDetails.this,
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                                 android.R.layout.simple_list_item_1, units);
                         listView.setAdapter(adapter);
                     }
@@ -156,11 +200,11 @@ public class CourseDetails extends AppCompatActivity {
                 String yr=Year.getSelectedItem().toString();
                 Query query;
                 if (sem.equals("1st Semester") && yr.equals("1st Year")){
-                    Toast.makeText(getBaseContext(), sem, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), sem, Toast.LENGTH_SHORT).show();
 
 
                 } else if (sem.equals("2nd Semester") && yr.equals("1st Year")){
-                    Toast.makeText(getBaseContext(), "This also Works", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "This also Works", Toast.LENGTH_SHORT).show();
 
                 }
                 if (sem.equals("1st Semester") && yr.equals("1st Year")) {
@@ -215,7 +259,7 @@ public class CourseDetails extends AppCompatActivity {
                             units.add(name);
                             units.add(code);
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(CourseDetails.this,
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                                 android.R.layout.simple_list_item_1, units);
                         listView.setAdapter(adapter);
                     }
@@ -236,13 +280,12 @@ public class CourseDetails extends AppCompatActivity {
         });
 
 
-
 //        FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        Query query;
-//        if (sem.equals("1st Semester")&& yr.equals("1st Year")){
-//            Toast.makeText(this, "It Works", Toast.LENGTH_SHORT).show();
-//        } else if (sem.equals("2nd Semester") && yr.equals("1st Year")){
-//            Toast.makeText(this, "This also Works", Toast.LENGTH_SHORT).show();
+//        if (sem.equals("1st Semester") && yr.equals("1st Year")) {
+//            Toast.makeText(getContext(), "It Works", Toast.LENGTH_SHORT).show();
+//        } else if (sem.equals("2nd Semester") && yr.equals("1st Year")) {
+//            Toast.makeText(getContext(), "This also Works", Toast.LENGTH_SHORT).show();
 //        }
 //        if (sem.equals("1st Semester") && yr.equals("1st Year")) {
 //            query = db.collection("units")
@@ -253,9 +296,9 @@ public class CourseDetails extends AppCompatActivity {
 //                    .whereGreaterThanOrEqualTo("unit_code", "2200")
 //                    .whereLessThanOrEqualTo("unit_code", "3200");
 //        } else {
-//            query = db.collection("units");
-////                    .whereGreaterThanOrEqualTo("unit_code", "1200")
-////                    .whereLessThanOrEqualTo("unit_code", "2100");
+//            query = db.collection("units")
+//                    .whereGreaterThanOrEqualTo("unit_code", "1200")
+//                    .whereLessThanOrEqualTo("unit_code", "2100");
 //        }
 ////        query = db.collection("units")
 ////                .whereGreaterThanOrEqualTo("unit_code", "1200")
@@ -271,7 +314,7 @@ public class CourseDetails extends AppCompatActivity {
 //                    units.add(name);
 //                    units.add(code);
 //                }
-//                ArrayAdapter<String> adapter = new ArrayAdapter<>(CourseDetails.this,
+//                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
 //                        android.R.layout.simple_list_item_1, units);
 //                listView.setAdapter(adapter);
 //            }
@@ -294,8 +337,6 @@ public class CourseDetails extends AppCompatActivity {
                 query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        String yr=Year.getSelectedItem().toString();
-                        String sem=semster.getSelectedItem().toString();
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // Define the new fields and their values
@@ -308,9 +349,9 @@ public class CourseDetails extends AppCompatActivity {
 
                                 // Update the document with the new data
                                 document.getReference().set(newData, SetOptions.merge());
-                                Intent j=new Intent(CourseDetails.this,ViewDetails.class);
+                                Intent j = new Intent(getContext(), ViewDetails.class);
                                 Bundle bundle1 = new Bundle();
-                                bundle1.putString("reg",reg);
+                                bundle1.putString("reg", reg);
                                 j.putExtras(bundle1);
                                 startActivity(j);
                             }
@@ -322,5 +363,26 @@ public class CourseDetails extends AppCompatActivity {
 
             }
         });
+
+
+
+
+
+
+
+
+
+
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+//    }
+
+
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_crsedtls, container, false);
     }
 }
